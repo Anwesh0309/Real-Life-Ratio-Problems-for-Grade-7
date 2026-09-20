@@ -150,15 +150,20 @@ export const RealWorldRatioLab = () => {
         <BatchRow part={sc.b} k={k} tone="b" />
       </div>
 
-      {/* Live ratio readout */}
-      <div className="bg-[#161129] border-2 border-amber-400/80 px-5 py-1.5 rounded-full text-amber-400 font-black text-xs md:text-sm shadow-glow-gold text-center">
-        {sc.a.label} {sc.a.count} × {k} = {aTotal} : {sc.b.label} {sc.b.count} × {k} = {bTotal} → still {sc.a.count} : {sc.b.count}
+      {/* Live ratio & Unit Rate readout */}
+      <div className="w-full flex items-center justify-center gap-2 flex-wrap">
+        <div className="bg-[#161129] border-2 border-amber-400/80 px-4 py-1.5 rounded-full text-amber-400 font-black text-xs md:text-sm shadow-glow-gold text-center">
+          📊 Scale Equation: ({sc.a.count} × {k}) : ({sc.b.count} × {k}) = <span className="text-white font-black">{aTotal} : {bTotal}</span>
+        </div>
+        <div className="bg-purple-950/80 border border-purple-500/60 px-3 py-1 rounded-full text-purple-200 font-black text-xs">
+          💡 Unit Rate: 1 {sc.a.unit || sc.a.label} = {(sc.b.count / sc.a.count).toFixed(2)} {sc.b.unit || sc.b.label}
+        </div>
       </div>
 
       {/* Mission */}
       <div
         key={`${scenarioId}-${solved}`}
-        className={`w-full max-w-3xl border-2 px-4 py-1.5 rounded-2xl text-xs md:text-sm font-black flex items-center justify-center gap-2 text-center ${
+        className={`w-full max-w-3xl border-2 px-4 py-2 rounded-2xl text-xs md:text-sm font-black flex items-center justify-center gap-2 text-center ${
           solved
             ? 'bg-emerald-950 border-emerald-500 text-emerald-300 shadow-glow-green animate-ratio-pop'
             : 'bg-[#161129] border-purple-700/60 text-purple-200'
@@ -167,8 +172,8 @@ export const RealWorldRatioLab = () => {
         {solved ? <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" /> : <Target className="w-4 h-4 text-amber-400 shrink-0" />}
         <span>
           {solved
-            ? `Mission complete! ×${k} batches gives ${withUnit(goalNow, goalPart.unit)} ${goalPart.label.toLowerCase()} and ${withUnit(foundTotal, found.unit)} ${found.label.toLowerCase()}!`
-            : `Mission: ${sc.mission} (Goal: ${withUnit(sc.goal, goalPart.unit)}. Now: ${withUnit(goalNow, goalPart.unit)}.)`}
+            ? `🎉 Mission Accomplished! Multiplier ×${k} yields ${withUnit(goalNow, goalPart.unit)} ${goalPart.label.toLowerCase()} and ${withUnit(foundTotal, found.unit)} ${found.label.toLowerCase()}!`
+            : `🎯 Mission: ${sc.mission} (Goal: ${withUnit(sc.goal, goalPart.unit)}. Current: ${withUnit(goalNow, goalPart.unit)}.)`}
         </span>
       </div>
     </div>

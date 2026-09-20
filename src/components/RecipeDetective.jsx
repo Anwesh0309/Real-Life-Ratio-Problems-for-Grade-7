@@ -75,6 +75,7 @@ export const RecipeDetective = () => {
   const [wrongTap, setWrongTap] = useState(null); // index of a row tapped by mistake
   const [wrongChip, setWrongChip] = useState(null);
   const [tries, setTries] = useState(0);
+  const [solvedCases, setSolvedCases] = useState([]);
 
   const c = CASES[caseIndex];
   const badIndex = c.rows.findIndex((r) => r.wrong);
@@ -106,6 +107,7 @@ export const RecipeDetective = () => {
     if (value === badRow.base * c.k) {
       setFixed(true);
       setWrongChip(null);
+      setSolvedCases((prev) => (prev.includes(caseIndex) ? prev : [...prev, caseIndex]));
       confetti({ particleCount: 45, spread: 65, origin: { y: 0.6 } });
       soundEngine.playText(narrationScript.correct_cheer);
     } else {
@@ -118,16 +120,16 @@ export const RecipeDetective = () => {
 
   let status;
   if (fixed) {
-    status = { tone: 'good', text: `Case solved! ${badRow.base} × ${c.k} = ${badRow.base * c.k}, not ${badRow.shown} (${badRow.slip}).` };
+    status = { tone: 'good', text: `🎉 Case solved! ${badRow.name} multiplier rule: ${badRow.base} × ${c.k} = ${badRow.base * c.k} (${badRow.slip}). Multiplicative ratio preserved!` };
   } else if (found) {
     status = wrongChip !== null
-      ? { tone: 'bad', text: `Not quite. Multiply ${badRow.base} by ${c.k}: every ingredient uses the same multiplier.` }
-      : { tone: 'info', text: `Found it! ${badRow.name} is off. What should ${badRow.base} × ${c.k} be?` };
+      ? { tone: 'bad', text: `Not quite. Scale factor is ×${c.k}: every ingredient uses the SAME multiplier!` }
+      : { tone: 'info', text: `🔍 Found it! ${badRow.name} is mis-scaled. What is ${badRow.base} × ${c.k}?` };
   } else if (wrongTap !== null) {
     const r = c.rows[wrongTap];
-    status = { tone: 'bad', text: `${r.name} is fine: ${r.base} × ${c.k} = ${r.shown}. Look for the odd one out!` };
+    status = { tone: 'bad', text: `${r.name} follows the rule: ${r.base} × ${c.k} = ${r.shown}. Inspect the remaining rows!` };
   } else {
-    status = { tone: 'info', text: 'Every amount should be × ' + c.k + '. Tap the row that does not follow the rule.' };
+    status = { tone: 'info', text: '🔍 Every ingredient should be multiplied by ×' + c.k + '. Tap the row that breaks the rule!' };
   }
 
   const toneClass = {
@@ -140,14 +142,19 @@ export const RecipeDetective = () => {
     <div className="w-full max-w-lg flex flex-col items-center space-y-2 select-none">
       {/* Case number & swap */}
       <div className="w-full flex items-center justify-between">
-        <span className="text-xs md:text-sm font-black text-cyan-300">Case #{caseIndex + 1}</span>
-        <button
-          onClick={next}
-          className="bg-amber-400 hover:bg-amber-300 text-slate-950 px-3.5 py-1 rounded-xl text-xs font-black flex items-center gap-1 cursor-pointer shadow-glow-gold transition-transform hover:scale-105"
-        >
-          <Dices className="w-4 h-4" />
-          <span>New Case 🎲</span>
-        </button>
+        <span className="text-xs md:text-sm font-black text-cyan-300">Case #{caseIndex + 1} of {CASES.length}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-black text-amber-300 bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-500/40">
+            🕵️ Solved: {solvedCases.length}/{CASES.length}
+          </span>
+          <button
+            onClick={next}
+            className="bg-amber-400 hover:bg-amber-300 text-slate-950 px-3.5 py-1 rounded-xl text-xs font-black flex items-center gap-1 cursor-pointer shadow-glow-gold transition-transform hover:scale-105"
+          >
+            <Dices className="w-4 h-4" />
+            <span>Next Case 🎲</span>
+          </button>
+        </div>
       </div>
 
       {/* Case file */}

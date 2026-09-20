@@ -51,6 +51,8 @@ export const BarModelBuilder = () => {
   const [puzzleIndex, setPuzzleIndex] = useState(0);
   const [units, setUnits] = useState({ a: 1, b: 1 });
   const [unitValue, setUnitValue] = useState(1);
+  const [showFormula, setShowFormula] = useState(false);
+  const [inspectedUnit, setInspectedUnit] = useState(null);
 
   const puzzle = PUZZLES[puzzleIndex];
   const built = units.a === puzzle.ra && units.b === puzzle.rb;
@@ -61,6 +63,8 @@ export const BarModelBuilder = () => {
   useEffect(() => {
     setUnits({ a: 1, b: 1 });
     setUnitValue(1);
+    setShowFormula(false);
+    setInspectedUnit(null);
   }, [puzzleIndex]);
 
   // celebrate the first time each puzzle is solved
@@ -114,13 +118,21 @@ export const BarModelBuilder = () => {
       {/* Puzzle number & swap */}
       <div className="w-full flex items-center justify-between">
         <span className="text-xs md:text-sm font-black text-cyan-300">Story Scenario #{puzzleIndex + 1} of {PUZZLES.length}</span>
-        <button
-          onClick={nextPuzzle}
-          className="bg-amber-400 hover:bg-amber-300 text-slate-950 px-3.5 py-1 rounded-xl text-xs font-black flex items-center gap-1 cursor-pointer shadow-glow-gold transition-transform hover:scale-105"
-        >
-          <Dices className="w-4 h-4" />
-          <span>Next Story Scenario 🎲</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowFormula(!showFormula)}
+            className="bg-purple-900/60 hover:bg-purple-800 text-purple-200 px-3 py-1 rounded-xl text-xs font-black flex items-center gap-1 cursor-pointer border border-purple-600/60"
+          >
+            <span>📐 {showFormula ? 'Hide Formula' : 'Formula Guide'}</span>
+          </button>
+          <button
+            onClick={nextPuzzle}
+            className="bg-amber-400 hover:bg-amber-300 text-slate-950 px-3.5 py-1 rounded-xl text-xs font-black flex items-center gap-1 cursor-pointer shadow-glow-gold transition-transform hover:scale-105"
+          >
+            <Dices className="w-4 h-4" />
+            <span>Next Scenario 🎲</span>
+          </button>
+        </div>
       </div>
 
       {/* Story line */}
@@ -129,6 +141,17 @@ export const BarModelBuilder = () => {
           📖 {puzzle.story}
         </p>
       </div>
+
+      {/* Grade 7 Formula Breakdown Card */}
+      {showFormula && (
+        <div className="w-full bg-indigo-950/80 border border-indigo-500/60 rounded-2xl p-3 text-xs md:text-sm font-black text-indigo-200 text-left space-y-1 animate-ratio-pop">
+          <p className="text-amber-300">💡 Grade 7 Ratio Sharing Steps:</p>
+          <p>1️⃣ Total Units = {puzzle.ra} + {puzzle.rb} = {puzzle.ra + puzzle.rb} units</p>
+          <p>2️⃣ 1 Unit Value = {puzzle.total} ÷ {puzzle.ra + puzzle.rb} = {puzzle.total / (puzzle.ra + puzzle.rb)} {puzzle.thing}</p>
+          <p>3️⃣ {puzzle.a}'s Share = {puzzle.ra} × {puzzle.total / (puzzle.ra + puzzle.rb)} = {puzzle.ra * (puzzle.total / (puzzle.ra + puzzle.rb))}</p>
+          <p>4️⃣ {puzzle.b}'s Share = {puzzle.rb} × {puzzle.total / (puzzle.ra + puzzle.rb)} = {puzzle.rb * (puzzle.total / (puzzle.ra + puzzle.rb))}</p>
+        </div>
+      )}
 
       {/* Step chips & Grade 7 Math Formula Pill */}
       <div className="flex items-center gap-2 text-[11px] md:text-xs font-black flex-wrap justify-center">
@@ -150,12 +173,14 @@ export const BarModelBuilder = () => {
               <UnitStepper value={row.count} onChange={(v) => setUnitCount(row.key, v)} disabled={built} />
               <div className="flex-1 flex items-center gap-1 min-w-0">
                 {Array.from({ length: row.count }).map((_, i) => (
-                  <div
+                  <button
                     key={i}
-                    className={`h-9 md:h-10 flex-1 max-w-11 rounded-lg border-2 flex items-center justify-center text-xs md:text-sm font-black shadow-sm bar-grow ${style.block}`}
+                    onClick={() => setInspectedUnit(`${row.name} Unit ${i + 1} = ${built ? unitValue : 1}`)}
+                    className={`h-9 md:h-10 flex-1 max-w-11 rounded-lg border-2 flex items-center justify-center text-xs md:text-sm font-black shadow-sm cursor-pointer hover:scale-105 transition-transform bar-grow ${style.block}`}
+                    title={`Click to inspect block ${i + 1}`}
                   >
                     {built ? unitValue : ''}
-                  </div>
+                  </button>
                 ))}
               </div>
               <span className={`w-16 text-right text-xs md:text-sm font-black ${built ? style.text : 'text-purple-400'}`}>

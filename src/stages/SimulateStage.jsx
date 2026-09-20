@@ -40,7 +40,7 @@ export const SimulateStage = () => {
   const stationIndex = STATIONS.findIndex((s) => s.id === simulateStation);
 
   return (
-    <div className="relative w-full h-full min-h-screen max-h-screen flex flex-col justify-between items-center p-2 md:p-4 cosmic-bg overflow-hidden select-none">
+    <div className="relative w-full h-full min-h-screen flex flex-col justify-between items-center p-3 md:p-6 cosmic-bg overflow-y-auto select-none">
       
       {/* Top Right Close Button matching screenshot */}
       <div className="w-full max-w-6xl lg:max-w-7xl flex items-center justify-end shrink-0 pt-1 px-2 z-20">
@@ -54,7 +54,7 @@ export const SimulateStage = () => {
       </div>
 
       {/* Main Centered 2-Column Modal Card matching screenshot */}
-      <div className="relative z-10 bg-[#120A2B]/90 border border-purple-500/30 rounded-3xl p-4 md:p-6 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-md max-w-6xl lg:max-w-7xl w-full flex flex-col my-auto shrink-0">
+      <div className="relative z-10 bg-[#120A2B]/90 border border-purple-500/30 rounded-3xl p-5 md:p-7 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-md max-w-6xl lg:max-w-7xl w-full flex flex-col my-auto shrink-0 space-y-3">
         
         {/* Top Glowing Cyan Handle Bar matching screenshot */}
         <div className="w-20 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.8)] mx-auto mb-2 shrink-0" />
@@ -66,13 +66,13 @@ export const SimulateStage = () => {
         </h1>
 
         {/* 2-Column Content Grid matching screenshot */}
-        <div className="flex flex-col md:flex-row gap-4 md:gap-5 w-full items-stretch">
+        <div className="flex flex-col md:flex-row gap-5 md:gap-6 w-full items-stretch">
           
           {/* Left Column: Station Selector Navigation Menu */}
           <div className="w-full md:w-1/3 lg:w-1/4 flex flex-col justify-between space-y-3 shrink-0">
             
             {/* Station Cards List */}
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-2.5">
               {STATIONS.map((st) => {
                 const isActive = simulateStation === st.id;
                 return (
@@ -99,7 +99,7 @@ export const SimulateStage = () => {
                         <h3 className={`text-sm md:text-base font-black ${isActive ? 'text-white' : 'text-purple-200'}`}>
                           Station {st.num}: {st.name}
                         </h3>
-                        <p className="text-xs text-purple-300/80 font-bold truncate max-w-[150px]">
+                        <p className="text-xs text-purple-300/80 font-bold truncate max-w-[160px]">
                           {st.focus}
                         </p>
                       </div>
@@ -117,7 +117,7 @@ export const SimulateStage = () => {
             {/* Bottom Yellow CTA Button on Left Column */}
             <button
               onClick={() => setStage('practice')}
-              className="w-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-black text-sm md:text-base py-3 px-4 rounded-full shadow-[0_0_20px_rgba(255,184,0,0.6)] hover:scale-105 transition-transform flex items-center justify-center gap-2 cursor-pointer mt-auto"
+              className="w-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-black text-sm md:text-base py-3.5 px-4 rounded-full shadow-[0_0_20px_rgba(255,184,0,0.6)] hover:scale-105 transition-transform flex items-center justify-center gap-2 cursor-pointer mt-auto"
             >
               <span>Go to Practice Phase!</span>
               <ArrowRight className="w-5 h-5 stroke-[3]" />
@@ -126,7 +126,7 @@ export const SimulateStage = () => {
           </div>
 
           {/* Right Column: Interactive Lab Workspace Container */}
-          <div className="w-full md:w-2/3 lg:w-3/4 bg-[#0B051C]/90 border border-purple-800/60 rounded-2xl p-4 md:p-5 flex flex-col justify-between min-h-[360px] md:min-h-[380px] shadow-inner">
+          <div className="w-full md:w-2/3 lg:w-3/4 bg-[#0B051C]/90 border border-purple-800/60 rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[420px] md:min-h-[460px] shadow-inner">
             
             {/* Top Workspace Bar */}
             <div className="flex items-center justify-between pb-2 border-b border-purple-900/50 mb-2">

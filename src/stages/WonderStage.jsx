@@ -13,7 +13,7 @@ export const WonderStage = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-full min-h-screen max-h-screen flex flex-col justify-between items-center p-2 md:p-3 cosmic-bg overflow-hidden select-none">
+    <div className="relative w-full h-full min-h-screen flex flex-col justify-between items-center p-3 md:p-6 cosmic-bg overflow-y-auto select-none">
       
       {/* Top Right Close Button matching screenshot */}
       <div className="w-full max-w-4xl lg:max-w-5xl flex items-center justify-end shrink-0 pt-1 px-2 z-20">
@@ -27,7 +27,7 @@ export const WonderStage = () => {
       </div>
 
       {/* Centered Modal Card matching screenshot */}
-      <div className="relative z-10 bg-[#120A2B]/90 border border-purple-500/30 rounded-3xl p-4 md:p-6 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-md max-w-4xl lg:max-w-5xl w-full flex flex-col items-center text-center my-auto space-y-2.5 md:space-y-3">
+      <div className="relative z-10 bg-[#120A2B]/90 border border-purple-500/30 rounded-3xl p-5 md:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-md max-w-4xl lg:max-w-5xl w-full flex flex-col items-center text-center my-auto space-y-3 md:space-y-4">
         
         {/* Top Glowing Purple Handle Bar matching screenshot */}
         <div className="w-20 h-1.5 rounded-full bg-purple-500 shadow-[0_0_12px_rgba(168,85,247,0.8)] mb-1 shrink-0" />
