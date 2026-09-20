@@ -3,10 +3,10 @@ import useAppStore from '../store/useAppStore';
 import RatioMixerRig from '../components/RatioMixerRig';
 import { narrationScript } from '../data/narration';
 import soundEngine from '../utils/audio';
-import { Sparkles, ArrowRight, RefreshCcw, X } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 export const WonderStage = () => {
-  const { setStage, resetWorldsProgress } = useAppStore();
+  const { setStage } = useAppStore();
 
   useEffect(() => {
     soundEngine.playText(narrationScript.wonder_prompt);
@@ -15,17 +15,6 @@ export const WonderStage = () => {
   return (
     <div className="relative w-full h-full min-h-screen flex flex-col justify-between items-center p-3 md:p-6 cosmic-bg overflow-y-auto select-none">
       
-      {/* Top Right Close Button matching screenshot */}
-      <div className="w-full max-w-4xl lg:max-w-5xl flex items-center justify-end shrink-0 pt-1 px-2 z-20">
-        <button
-          onClick={() => setStage('home')}
-          className="w-8 h-8 rounded-lg bg-indigo-600/80 hover:bg-indigo-500 text-white flex items-center justify-center font-black cursor-pointer shadow-md transition-colors"
-          title="Close"
-        >
-          <X className="w-5 h-5 stroke-[3]" />
-        </button>
-      </div>
-
       {/* Centered Modal Card matching screenshot */}
       <div className="relative z-10 bg-[#120A2B]/90 border border-purple-500/30 rounded-3xl p-5 md:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-md max-w-4xl lg:max-w-5xl w-full flex flex-col items-center text-center my-auto space-y-3 md:space-y-4">
         
@@ -92,17 +81,6 @@ export const WonderStage = () => {
           <ArrowRight className="w-5 h-5 stroke-[3]" />
         </button>
 
-      </div>
-
-      {/* 6. Reset Lesson Progress Button outside Card matching screenshot */}
-      <div className="shrink-0 pb-1 z-10 my-1">
-        <button
-          onClick={() => resetWorldsProgress()}
-          className="bg-[#130A2B]/80 hover:bg-purple-900/50 border border-purple-800/80 text-purple-300 hover:text-white text-xs md:text-sm font-black px-6 py-2 rounded-full cursor-pointer transition-colors shadow-md flex items-center gap-2"
-        >
-          <RefreshCcw className="w-4 h-4 text-purple-300" />
-          <span>Reset Lesson Progress</span>
-        </button>
       </div>
 
     </div>

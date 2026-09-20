@@ -6,7 +6,7 @@ import RecipeDetective from '../components/RecipeDetective';
 import RealWorldRatioLab from '../components/RealWorldRatioLab';
 import { narrationScript } from '../data/narration';
 import soundEngine from '../utils/audio';
-import { ArrowRight, ArrowLeft, RefreshCcw, X, Unlock, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowLeft, X, Unlock, Sparkles } from 'lucide-react';
 
 const STATIONS = [
   { id: 'A', num: 1, name: 'Robo\'s Shake Lab', icon: '🥭', focus: 'Compare & scale shake ratios (Story Slide 1 & 2)' },
@@ -23,7 +23,7 @@ const STATION_TIPS = {
 };
 
 export const SimulateStage = () => {
-  const { simulateStation, setSimulateStation, setStage, resetWorldsProgress } = useAppStore();
+  const { simulateStation, setSimulateStation, setStage } = useAppStore();
 
   const stationNarrationMap = {
     A: narrationScript.station_a_intro,
@@ -190,17 +190,6 @@ export const SimulateStage = () => {
 
         </div>
 
-      </div>
-
-      {/* Reset Lesson Progress Button outside Card matching screenshot */}
-      <div className="shrink-0 pb-1 z-10 my-1">
-        <button
-          onClick={() => resetWorldsProgress()}
-          className="bg-[#130A2B]/80 hover:bg-purple-900/50 border border-purple-800/80 text-purple-300 hover:text-white text-xs md:text-sm font-black px-6 py-2 rounded-full cursor-pointer transition-colors shadow-md flex items-center gap-2"
-        >
-          <RefreshCcw className="w-4 h-4 text-purple-300" />
-          <span>Reset Lesson Progress</span>
-        </button>
       </div>
 
     </div>
