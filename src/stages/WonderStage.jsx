@@ -3,73 +3,95 @@ import useAppStore from '../store/useAppStore';
 import RatioMixerRig from '../components/RatioMixerRig';
 import { narrationScript } from '../data/narration';
 import soundEngine from '../utils/audio';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, ArrowRight, RefreshCcw } from 'lucide-react';
 
 export const WonderStage = () => {
-  const { setStage } = useAppStore();
+  const { setStage, resetWorldsProgress } = useAppStore();
 
   useEffect(() => {
     soundEngine.playText(narrationScript.wonder_prompt);
   }, []);
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-between p-3 md:p-5 cosmic-bg overflow-hidden select-none">
-      {/* Centered Main Wrapper */}
-      <div className="relative z-10 flex flex-col items-center text-center max-w-4xl w-full my-auto space-y-3 md:space-y-4">
+    <div className="relative w-full h-full flex flex-col items-center justify-center p-3 md:p-5 cosmic-bg overflow-hidden select-none">
+      
+      {/* Centered Modal Card matching screenshot */}
+      <div className="relative z-10 bg-[#120A2B]/90 border border-purple-500/30 rounded-3xl p-6 md:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-md max-w-xl w-full flex flex-col items-center text-center my-auto">
         
-        {/* 1. Mascot Speech Header */}
-        <div className="flex items-center gap-3 justify-center">
-          <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#130E26] border-2 border-amber-400 flex items-center justify-center text-2xl md:text-3xl shadow-[0_0_15px_rgba(255,184,0,0.4)] shrink-0">
-            🤖
-          </div>
+        {/* Top Glowing Purple Handle Bar matching screenshot */}
+        <div className="w-16 h-1.5 rounded-full bg-purple-500 shadow-[0_0_12px_rgba(168,85,247,0.8)] mb-3" />
 
-          <div className="relative bg-white text-slate-900 rounded-full px-6 py-2 shadow-xl border border-slate-100 flex items-center justify-center">
-            <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-0 h-0 border-t-6 border-t-transparent border-r-8 border-r-white border-b-6 border-b-transparent" />
-            <p className="text-base md:text-lg font-black text-slate-900">
-              Hmm... I wonder... 🤔
-            </p>
-          </div>
+        {/* 1. Header Title: 🔮 Wonder Hook */}
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-white font-display flex items-center justify-center gap-2.5">
+          <span>🔮</span>
+          <span>Wonder Hook</span>
+        </h1>
+
+        {/* 2. Robot Mascot Face Icon */}
+        <div className="w-13 h-13 rounded-full bg-[#1A0F3C] border border-purple-500/40 flex items-center justify-center text-3xl shadow-md my-3 shrink-0">
+          🤖
         </div>
 
-        {/* 2. Interactive Simulator Card */}
-        <div className="w-full max-w-2xl bg-[#130E26]/90 border-2 border-purple-900/70 rounded-3xl p-3 shadow-2xl flex flex-col items-center justify-center relative space-y-1 shrink-0">
-          <div className="w-full text-left flex items-center gap-1.5 text-xs font-black tracking-widest text-amber-400 uppercase">
-            <span className="w-2.5 h-2.5 rounded-sm bg-amber-400" />
-            <span>RATIO TASTE RIG (MANGO SHAKE)</span>
+        {/* 3. Inner Dashed Highlight Frame Box matching screenshot */}
+        <div className="w-full bg-[#160B33] border-2 border-dashed border-purple-500/40 rounded-2xl p-4 md:p-5 flex flex-col items-center justify-center text-center shadow-inner my-2">
+          
+          {/* Top Emoji Icon */}
+          <div className="text-3xl md:text-4xl mb-1">
+            🧱
           </div>
 
-          <div className="w-full flex items-center justify-center py-1">
+          {/* Big Golden Title */}
+          <h2 className="text-3xl md:text-4xl font-black text-amber-400 font-display drop-shadow-[0_2px_12px_rgba(255,184,0,0.4)]">
+            1 : 2 Ratio!
+          </h2>
+
+          {/* Sub-label under big title */}
+          <p className="text-[11px] md:text-xs font-black tracking-widest text-purple-300 uppercase mt-1">
+            ✓ REAL-WORLD RATIO HOOK!
+          </p>
+
+          {/* Compact Interactive Simulator inside Frame */}
+          <div className="w-full pt-2">
             <RatioMixerRig mode="compare" compact={true} />
           </div>
         </div>
 
-        {/* 3. On-Screen Text Narration (100% Word-for-Word Matched to Audio) */}
-        <div className="bg-[#130E26]/80 border border-purple-800/80 rounded-2xl p-4 md:p-5 max-w-3xl shadow-xl space-y-2 text-center">
-          <p className="text-base md:text-lg lg:text-xl font-extrabold text-slate-100 leading-relaxed">
-            Robo makes a mango shake with 1 scoop of mango and 2 scoops of milk. Alex says: <span className="text-amber-300 font-black">"If you use 2 scoops of mango and 4 scoops of milk, the shake will taste stronger, because there is more mango!"</span> Is that actually true?
+        {/* 4. On-Screen Story Question Paragraph */}
+        <div className="my-2 space-y-2">
+          <p className="text-sm md:text-base lg:text-lg font-extrabold text-white leading-relaxed px-2">
+            Robo makes a mango shake with <span className="text-amber-400 font-black">1 scoop</span> of mango and <span className="text-amber-400 font-black">2 scoops</span> of milk. Alex says: <span className="text-amber-300 font-black">"If you use 2 scoops of mango and 4 scoops of milk, the shake will taste stronger, because there is more mango!"</span> Is that actually true?
           </p>
-          
-          <p className="text-sm md:text-base font-extrabold text-purple-200 italic">
+
+          <p className="text-xs md:text-sm font-extrabold text-purple-200/90 italic">
             What if you added 2 more scoops of mango but no extra milk? Would the shake still taste the same?
           </p>
+
+          <div className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full border border-amber-400/60 bg-amber-950/40 text-amber-300 font-black text-xs md:text-sm shadow-md mt-1">
+            <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>Same ratio, same taste! Multiply both parts equally to scale!</span>
+          </div>
         </div>
 
-        {/* 4. Golden Rule Pill Box */}
-        <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-amber-400/80 bg-amber-950/40 text-amber-300 font-black text-sm md:text-base text-center shadow-[0_0_20px_rgba(255,184,0,0.35)]">
-          <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
-          <span>Same ratio, same taste! Multiply both parts by the same number and the ratio never changes!</span>
-          <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
-        </div>
-
-        {/* 5. Primary Gold CTA Button */}
+        {/* 5. Golden CTA Button matching screenshot */}
         <button
           onClick={() => setStage('story')}
-          className="w-full max-w-sm bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-black text-lg md:text-xl py-3.5 rounded-full shadow-[0_0_25px_rgba(255,184,0,0.7)] hover:scale-105 transition-transform flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full max-w-xs bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-black text-base md:text-lg py-3 rounded-full shadow-[0_0_20px_rgba(255,184,0,0.7)] hover:scale-105 transition-transform flex items-center justify-center gap-2 cursor-pointer mt-3"
         >
-          <span>I have a guess! 🔍 Let's Find Out!</span>
+          <span>Discover the Story</span>
+          <ArrowRight className="w-5 h-5 stroke-[3]" />
         </button>
 
       </div>
+
+      {/* 6. Reset Lesson Progress Button outside Card matching screenshot */}
+      <button
+        onClick={() => resetWorldsProgress()}
+        className="relative z-10 bg-[#130A2B]/80 hover:bg-purple-900/50 border border-purple-800/80 text-purple-300 hover:text-white text-xs font-black px-5 py-2 rounded-full cursor-pointer transition-colors shadow-md mt-3 flex items-center gap-1.5"
+      >
+        <RefreshCcw className="w-3.5 h-3.5 text-purple-300" />
+        <span>Reset Lesson Progress</span>
+      </button>
+
     </div>
   );
 };
