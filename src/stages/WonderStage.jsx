@@ -3,7 +3,7 @@ import useAppStore from '../store/useAppStore';
 import RatioMixerRig from '../components/RatioMixerRig';
 import { narrationScript } from '../data/narration';
 import soundEngine from '../utils/audio';
-import { Sparkles, ArrowRight, RefreshCcw } from 'lucide-react';
+import { Sparkles, ArrowRight, RefreshCcw, X } from 'lucide-react';
 
 export const WonderStage = () => {
   const { setStage, resetWorldsProgress } = useAppStore();
@@ -13,8 +13,19 @@ export const WonderStage = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center p-3 md:p-5 cosmic-bg overflow-hidden select-none">
+    <div className="relative w-full h-full flex flex-col justify-between items-center p-3 md:p-5 cosmic-bg overflow-hidden select-none">
       
+      {/* Top Right Close Button matching screenshot */}
+      <div className="w-full max-w-4xl flex items-center justify-end shrink-0 pt-1 px-2 z-20">
+        <button
+          onClick={() => setStage('home')}
+          className="w-7 h-7 rounded-lg bg-indigo-600/80 hover:bg-indigo-500 text-white flex items-center justify-center font-black cursor-pointer shadow-md transition-colors"
+          title="Close"
+        >
+          <X className="w-4 h-4 stroke-[3]" />
+        </button>
+      </div>
+
       {/* Centered Modal Card matching screenshot */}
       <div className="relative z-10 bg-[#120A2B]/90 border border-purple-500/30 rounded-3xl p-6 md:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-md max-w-xl w-full flex flex-col items-center text-center my-auto">
         
@@ -84,13 +95,15 @@ export const WonderStage = () => {
       </div>
 
       {/* 6. Reset Lesson Progress Button outside Card matching screenshot */}
-      <button
-        onClick={() => resetWorldsProgress()}
-        className="relative z-10 bg-[#130A2B]/80 hover:bg-purple-900/50 border border-purple-800/80 text-purple-300 hover:text-white text-xs font-black px-5 py-2 rounded-full cursor-pointer transition-colors shadow-md mt-3 flex items-center gap-1.5"
-      >
-        <RefreshCcw className="w-3.5 h-3.5 text-purple-300" />
-        <span>Reset Lesson Progress</span>
-      </button>
+      <div className="shrink-0 pb-1 z-10">
+        <button
+          onClick={() => resetWorldsProgress()}
+          className="bg-[#130A2B]/80 hover:bg-purple-900/50 border border-purple-800/80 text-purple-300 hover:text-white text-xs font-black px-5 py-2 rounded-full cursor-pointer transition-colors shadow-md flex items-center gap-1.5"
+        >
+          <RefreshCcw className="w-3.5 h-3.5 text-purple-300" />
+          <span>Reset Lesson Progress</span>
+        </button>
+      </div>
 
     </div>
   );
