@@ -17,14 +17,56 @@ export const HomeScreen = () => {
 
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-between p-3 md:p-5 cosmic-bg overflow-hidden select-none">
-      {/* Decorative Rotating Faint Numerals in Background */}
-      <div className="absolute top-8 left-12 text-7xl md:text-9xl font-black text-purple-900/10 rotate-[-15deg] pointer-events-none font-display">
+      {/* Decorative Rotating Faint Numerals & Math Watermarks matching screenshot */}
+      <div className="absolute top-10 left-[7%] flex flex-col items-center text-4xl md:text-6xl font-black text-purple-300/10 rotate-[-12deg] pointer-events-none font-display leading-none">
+        <span>54</span>
+        <span className="text-6xl md:text-8xl">100</span>
+      </div>
+      <div className="absolute top-8 left-[20%] text-5xl md:text-7xl font-black text-purple-300/10 rotate-[-6deg] pointer-events-none font-display">
+        91 <span className="text-3xl md:text-5xl opacity-80">11</span> 66
+      </div>
+      <div className="absolute top-6 left-[34%] text-4xl md:text-6xl font-black text-purple-300/10 pointer-events-none font-display">
+        90
+      </div>
+      <div className="absolute top-4 left-[50%] -translate-x-1/2 text-4xl md:text-6xl font-black text-purple-300/10 pointer-events-none font-display">
+        64
+      </div>
+      <div className="absolute top-6 right-[30%] text-4xl md:text-5xl font-black text-purple-300/10 pointer-events-none font-display">
+        30 <span className="text-3xl md:text-4xl opacity-80">69</span>
+      </div>
+      <div className="absolute top-8 right-[16%] text-6xl md:text-8xl font-black text-purple-300/10 rotate-[8deg] pointer-events-none font-display">
+        500
+      </div>
+      <div className="absolute top-12 right-[6%] text-5xl md:text-7xl font-black text-purple-300/10 pointer-events-none font-display">
+        90
+      </div>
+      <div className="absolute top-28 right-[8%] text-5xl md:text-7xl font-black text-purple-300/10 rotate-[12deg] pointer-events-none font-display">
+        347
+      </div>
+      <div className="absolute top-1/3 left-[4%] text-6xl md:text-8xl font-black text-purple-300/10 rotate-[-15deg] pointer-events-none font-display">
+        H
+      </div>
+      <div className="absolute top-1/3 left-[28%] text-4xl md:text-5xl font-black text-purple-300/10 rotate-[-10deg] pointer-events-none font-display">
+        T
+      </div>
+      <div className="absolute bottom-28 left-[10%] text-6xl md:text-8xl font-black text-purple-300/10 rotate-[14deg] pointer-events-none font-display">
+        200
+      </div>
+      <div className="absolute top-1/2 right-[5%] text-5xl md:text-7xl font-black text-purple-300/10 rotate-[-8deg] pointer-events-none font-display">
+        123
+      </div>
+      <div className="absolute bottom-16 right-[8%] text-7xl md:text-9xl font-black text-purple-300/10 rotate-[-6deg] pointer-events-none font-display">
+        999
+      </div>
+
+      {/* Ratio Specific Watermarks */}
+      <div className="absolute top-20 left-[14%] text-6xl md:text-8xl font-black text-purple-400/10 rotate-[-14deg] pointer-events-none font-display">
         1 : 2
       </div>
-      <div className="absolute top-12 right-16 text-7xl md:text-9xl font-black text-purple-900/10 rotate-[12deg] pointer-events-none font-display">
+      <div className="absolute top-24 right-[22%] text-6xl md:text-8xl font-black text-purple-400/10 rotate-[10deg] pointer-events-none font-display">
         3 : 5
       </div>
-      <div className="absolute bottom-12 left-16 text-7xl md:text-9xl font-black text-purple-900/10 rotate-[-8deg] pointer-events-none font-display">
+      <div className="absolute bottom-24 left-[24%] text-6xl md:text-8xl font-black text-purple-400/10 rotate-[-8deg] pointer-events-none font-display">
         × 4
       </div>
 
@@ -78,7 +120,7 @@ export const HomeScreen = () => {
         </p>
 
         {/* 5. "YOUR LEARNING JOURNEY" Card */}
-        <div className="w-full bg-[#130E26]/90 border border-purple-900/60 rounded-3xl p-4 md:p-5 shadow-2xl space-y-3">
+        <div className="w-full bg-[#120A2A]/85 border border-[#301A60]/80 rounded-3xl p-4 md:p-5 shadow-[0_8px_32px_rgba(0,0,0,0.5)] space-y-3 backdrop-blur-md">
           <h2 className="text-xs md:text-sm font-black uppercase tracking-widest text-amber-400 text-center">
             YOUR LEARNING JOURNEY
           </h2>
@@ -177,21 +219,21 @@ export const HomeScreen = () => {
         {/* 7. Bottom 3 Stat Cards */}
         <div className="grid grid-cols-3 gap-3 md:gap-4 w-full">
           {/* Card 1 */}
-          <div className="bg-[#130E26]/90 border border-purple-900/60 rounded-2xl p-3 flex flex-col items-center justify-center text-center space-y-0.5">
+          <div className="bg-[#120A2A]/85 border border-[#301A60]/80 rounded-2xl p-3 flex flex-col items-center justify-center text-center space-y-0.5 backdrop-blur-md">
             <span className="text-3xl md:text-4xl">⚖️</span>
             <h4 className="text-sm md:text-base lg:text-lg font-black text-white">3 Big Ideas</h4>
             <p className="text-xs md:text-sm text-purple-300 font-bold">Compare, scale & share</p>
           </div>
 
           {/* Card 2 */}
-          <div className="bg-[#130E26]/90 border border-purple-900/60 rounded-2xl p-3 flex flex-col items-center justify-center text-center space-y-0.5">
+          <div className="bg-[#120A2A]/85 border border-[#301A60]/80 rounded-2xl p-3 flex flex-col items-center justify-center text-center space-y-0.5 backdrop-blur-md">
             <span className="text-3xl md:text-4xl">🧩</span>
             <h4 className="text-sm md:text-base lg:text-lg font-black text-white">4 Simulations</h4>
             <p className="text-xs md:text-sm text-purple-300 font-bold">Interactive labs</p>
           </div>
 
           {/* Card 3 */}
-          <div className="bg-[#130E26]/90 border border-purple-900/60 rounded-2xl p-3 flex flex-col items-center justify-center text-center space-y-0.5">
+          <div className="bg-[#120A2A]/85 border border-[#301A60]/80 rounded-2xl p-3 flex flex-col items-center justify-center text-center space-y-0.5 backdrop-blur-md">
             <span className="text-3xl md:text-4xl">🏆</span>
             <h4 className="text-sm md:text-base lg:text-lg font-black text-white">10 Game Worlds</h4>
             <p className="text-xs md:text-sm text-purple-300 font-bold">Quizzes & rewards</p>

@@ -7,7 +7,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #0F0B1E;
+    background-color: #070312;
     color: #F3F4F6;
     font-family: 'Inter', sans-serif;
   }
@@ -20,13 +20,12 @@
 
 /* Cosmic Grid & Ambient Background matching screenshot exactly */
 .cosmic-bg {
-  background-color: #0F0B1E;
+  background-color: #070312;
   background-image: 
-    radial-gradient(circle at 50% 35%, rgba(88, 28, 135, 0.25) 0%, transparent 70%),
-    radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 15% 75%, rgba(255, 184, 0, 0.06) 0%, transparent 40%),
-    radial-gradient(rgba(255, 255, 255, 0.06) 1.2px, transparent 1.2px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px;
+    radial-gradient(ellipse 75% 65% at 50% 25%, rgba(112, 38, 201, 0.42) 0%, rgba(68, 20, 133, 0.25) 45%, rgba(13, 6, 33, 0.95) 85%, #060210 100%),
+    radial-gradient(ellipse 55% 45% at 50% 88%, rgba(76, 29, 149, 0.22) 0%, transparent 70%),
+    radial-gradient(rgba(255, 255, 255, 0.035) 1.2px, transparent 1.2px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
 }
 
 /* Cosmic Oversized Decorative Watermark Numerals */
