@@ -12,7 +12,7 @@ import { narrationScript } from '../data/narration';
 
 const CASES = [
   {
-    title: 'Robo\'s Cookies', emoji: '🍪', from: 2, to: 6, k: 3,
+    title: 'Robo & Alex\'s Mango Cookies', emoji: '🍪', from: 2, to: 6, k: 3,
     rows: [
       { name: 'Flour', emoji: '🌾', unit: 'g', base: 100, shown: 300 },
       { name: 'Sugar', emoji: '🍬', unit: 'g', base: 50, shown: 150 },
@@ -21,16 +21,16 @@ const CASES = [
     ],
   },
   {
-    title: 'Pancake Party', emoji: '🥞', from: 3, to: 12, k: 4,
+    title: 'Café Pancake Party', emoji: '🥞', from: 3, to: 12, k: 4,
     rows: [
       { name: 'Milk', emoji: '🥛', unit: 'ml', base: 200, shown: 800 },
       { name: 'Flour', emoji: '🌾', unit: 'g', base: 150, shown: 600 },
-      { name: 'Eggs', emoji: '🥚', unit: '', base: 2, shown: 6, wrong: true, slip: 'added 4 instead of multiplying by 4' },
+      { name: 'Eggs', emoji: '🥚', unit: '', base: 2, shown: 6, wrong: true, slip: 'added +4 instead of multiplying by × 4' },
       { name: 'Sugar', emoji: '🍬', unit: 'g', base: 30, shown: 120 },
     ],
   },
   {
-    title: 'Bubble Tea Stall', emoji: '🧋', from: 2, to: 10, k: 5,
+    title: 'Robo\'s Bubble Tea Stall', emoji: '🧋', from: 2, to: 10, k: 5,
     rows: [
       { name: 'Tea', emoji: '🍵', unit: 'ml', base: 150, shown: 750 },
       { name: 'Milk', emoji: '🥛', unit: 'ml', base: 100, shown: 500 },
@@ -39,7 +39,7 @@ const CASES = [
     ],
   },
   {
-    title: 'Fried Rice Night', emoji: '🍳', from: 4, to: 8, k: 2,
+    title: 'School Picnic Fried Rice', emoji: '🍳', from: 4, to: 8, k: 2,
     rows: [
       { name: 'Rice', emoji: '🍚', unit: 'cups', base: 3, shown: 6 },
       { name: 'Eggs', emoji: '🥚', unit: '', base: 2, shown: 4 },
@@ -48,7 +48,7 @@ const CASES = [
     ],
   },
   {
-    title: 'Green Paint Mix', emoji: '🎨', from: 2, to: 12, k: 6,
+    title: 'School Art Mural Green Paint', emoji: '🎨', from: 2, to: 12, k: 6,
     rows: [
       { name: 'Blue', emoji: '🔵', unit: 'ml', base: 15, shown: 90 },
       { name: 'Yellow', emoji: '🟡', unit: 'ml', base: 25, shown: 150 },

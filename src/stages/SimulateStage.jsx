@@ -9,17 +9,17 @@ import soundEngine from '../utils/audio';
 import { ArrowRight, ArrowLeft, RefreshCcw, X, Unlock, Sparkles } from 'lucide-react';
 
 const STATIONS = [
-  { id: 'A', num: 1, name: 'Ratio Mixer', icon: '🥭', focus: 'Compare & mix equivalent ratios' },
-  { id: 'B', num: 2, name: 'Bar Model Builder', icon: '📊', focus: 'Find 1 unit value to share totals' },
-  { id: 'C', num: 3, name: 'Recipe Detective', icon: '🕵️', focus: 'Spot and fix mis-scaled ingredients' },
-  { id: 'D', num: 4, name: 'Real-World Ratio Lab', icon: '🌍', focus: 'Scale recipes, maps & teams' },
+  { id: 'A', num: 1, name: 'Robo\'s Shake Lab', icon: '🥭', focus: 'Compare & scale shake ratios (Story Slide 1 & 2)' },
+  { id: 'B', num: 2, name: 'Bar Model Sharing', icon: '📊', focus: 'Find 1 unit value to share totals (Story Slide 3)' },
+  { id: 'C', num: 3, name: 'Recipe Detective', icon: '🕵️', focus: 'Spot & fix mis-scaled ingredients (Story Slide 4)' },
+  { id: 'D', num: 4, name: 'Real-World Scale Lab', icon: '🌍', focus: 'Scale boba, map distance, paint & rice' },
 ];
 
 const STATION_TIPS = {
-  A: 'Try a bigger batch: 4 : 6 has the very same shade as 2 : 3!',
-  B: 'Total ÷ total units = 1 unit. Then multiply by each share!',
-  C: 'Same multiplier for every ingredient. Adding is not multiplying!',
-  D: 'Both parts grow by the same multiplier, so the ratio never changes!',
+  A: 'Story Rule: Multiply both Mango & Milk scoops by the same number for identical taste!',
+  B: 'Story Rule: Total Amount ÷ Total Units = 1 Unit Value. Multiply 1 unit by each part!',
+  C: 'Detective Secret: Multiplicative scaling (×k) preserves ratio. Additive (+x) ruins taste!',
+  D: 'Real-World Scaling: Multiply both parts by Scale Factor k to solve proportional missions!',
 };
 
 export const SimulateStage = () => {

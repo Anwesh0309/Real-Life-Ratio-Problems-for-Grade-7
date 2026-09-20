@@ -113,15 +113,24 @@ const Stepper = ({ icon, value, onChange, label }) => (
 
 const RatioLine = ({ a, b, dim = false, showSimplest = true }) => {
   const [sa, sb] = simplify(a, b);
+  const total = a + b;
+  const pct = total === 0 ? 0 : Math.round((a / total) * 100);
   return (
-    <div className="flex flex-col items-center leading-tight">
-      <span className={`text-sm md:text-base font-black ${dim ? 'text-purple-200' : 'text-white'}`}>
-        🥭 {a} : {b} 🥛
+    <div className="flex flex-col items-center leading-tight space-y-0.5">
+      <span className={`text-xs md:text-sm font-black ${dim ? 'text-purple-200' : 'text-white'}`}>
+        🥭 {a} : {b} 🥛 <span className="text-amber-400 font-extrabold text-[11px] md:text-xs">({a} : {total} total)</span>
       </span>
       {showSimplest && (
-        <span className="text-[11px] md:text-xs font-extrabold text-purple-300">
-          {a + b === 0 ? 'no scoops yet' : `simplest form ${sa} : ${sb}`}
-        </span>
+        <div className="flex items-center gap-1.5 flex-wrap justify-center text-[10px] md:text-xs font-black">
+          <span className="text-purple-300">
+            {total === 0 ? 'No scoops yet' : `Simplest: ${sa} : ${sb}`}
+          </span>
+          {total > 0 && (
+            <span className="bg-amber-950/60 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/40">
+              {pct}% Mango Concentration
+            </span>
+          )}
+        </div>
       )}
     </div>
   );
@@ -133,7 +142,7 @@ export const RatioMixerRig = ({
   largeCircle = false,
 }) => {
   const compactOnly = compact && !largeCircle; // Wonder card: keep it short
-  const glassH = largeCircle ? 150 : compact ? 92 : 130;
+  const glassH = largeCircle ? 140 : compact ? 90 : 125;
 
   // compare mode: Robo's fixed recipe vs. Alex's adjustable shake
   const [alex, setAlex] = useState({ a: 2, b: 4 });
@@ -190,27 +199,28 @@ export const RatioMixerRig = ({
     status = { tone: 'info', text: 'Add some scoops to your shake!' };
   } else if (success) {
     const [sa, sb] = simplify(me.a, me.b);
-    status = { tone: 'good', text: `Same taste! ${me.a} : ${me.b} = ${sa} : ${sb} = ${ref.a} : ${ref.b}` };
+    const k = me.a / sa;
+    status = { tone: 'good', text: `✨ Same taste! Scale Factor ×${k}: ${me.a} : ${me.b} = ${sa} : ${sb} (Part-to-Whole: ${me.a} : ${me.a + me.b})` };
   } else if (identical) {
-    status = { tone: 'info', text: 'That is the exact recipe. Try a bigger or smaller batch!' };
+    status = { tone: 'info', text: 'That is the exact base recipe. Multiply both by 2, 3 or 4 to scale!' };
   } else {
-    status = { tone: 'bad', text: `Different taste: mango is ${strength}. ${me.a} : ${me.b} is not equivalent to ${ref.a} : ${ref.b}` };
+    status = { tone: 'bad', text: `Different taste: mango is ${strength}. Ratio ${me.a} : ${me.b} is not equivalent to ${ref.a} : ${ref.b}` };
   }
 
   const toneClass = {
-    good: 'bg-emerald-950/80 border-emerald-500 text-emerald-300 shadow-glow-green animate-ratio-pop',
+    good: 'bg-emerald-950/90 border-emerald-500 text-emerald-300 shadow-glow-green animate-ratio-pop',
     bad: 'bg-[#161129] border-pink-500/70 text-pink-300',
     info: 'bg-[#161129] border-amber-400/80 text-amber-400 shadow-glow-gold',
   }[status.tone];
 
-  const refLabel = mode === 'compare' ? "Robo's shake" : `Target shake ${targetIdx + 1}`;
-  const meLabel = mode === 'compare' ? "Alex's shake" : 'Your shake';
+  const refLabel = mode === 'compare' ? "Robo's Base Recipe" : `Target Shake #${targetIdx + 1}`;
+  const meLabel = mode === 'compare' ? "Alex's Scaled Batch" : 'Your Shake Batch';
 
   return (
     <div className="flex flex-col items-center justify-center w-full space-y-1.5 select-none">
       {/* Target chooser (Station A) */}
       {mode === 'target' && (
-        <div className="flex items-center justify-center gap-1.5 flex-wrap">
+        <div className="flex items-center justify-center gap-1.5 flex-wrap pb-1">
           {TARGETS.map((t, idx) => {
             const isActive = idx === targetIdx;
             const done = matched.includes(idx);
@@ -227,7 +237,7 @@ export const RatioMixerRig = ({
                 }`}
               >
                 {done && <CheckCircle2 className="w-3.5 h-3.5" />}
-                <span>{t.a} : {t.b}</span>
+                <span>Target {idx + 1}: {t.a} : {t.b}</span>
               </button>
             );
           })}
@@ -235,28 +245,28 @@ export const RatioMixerRig = ({
         </div>
       )}
 
-      <div className="w-full flex items-start justify-center gap-2 md:gap-5">
+      <div className="w-full flex items-start justify-center gap-2 md:gap-4">
         {/* Reference shake */}
-        <div className="flex flex-col items-center gap-1 flex-1 min-w-0">
-          <span className="text-xs md:text-sm font-black uppercase tracking-wider text-cyan-300">{refLabel}</span>
+        <div className="flex flex-col items-center gap-1 flex-1 min-w-0 bg-[#160B33]/60 p-2 rounded-2xl border border-purple-800/40">
+          <span className="text-[11px] md:text-xs font-black uppercase tracking-wider text-cyan-300">{refLabel}</span>
           <Glass a={ref.a} b={ref.b} height={glassH} />
           <RatioLine a={ref.a} b={ref.b} dim showSimplest={!compactOnly} />
         </div>
 
         {/* Equal / not equal sign */}
         <div
-          className={`self-center w-11 h-11 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center text-2xl md:text-3xl font-black shrink-0 transition-colors ${
+          className={`self-center w-10 h-10 md:w-11 md:h-11 rounded-full border-2 flex items-center justify-center text-xl md:text-2xl font-black shrink-0 transition-colors ${
             same ? 'bg-emerald-500 border-emerald-300 text-slate-950 shadow-glow-green' : 'bg-[#161129] border-pink-500/70 text-pink-400'
           }`}
-          title={same ? 'Equivalent ratios' : 'Different ratios'}
+          title={same ? 'Equivalent Ratios' : 'Different Ratios'}
         >
           {same ? '=' : '≠'}
         </div>
 
         {/* Adjustable shake */}
-        <div className="flex flex-col items-center gap-1 flex-1 min-w-0">
+        <div className="flex flex-col items-center gap-1 flex-1 min-w-0 bg-[#160B33]/60 p-2 rounded-2xl border border-purple-800/40">
           <div className="flex items-center gap-2">
-            <span className="text-xs md:text-sm font-black uppercase tracking-wider text-amber-300">{meLabel}</span>
+            <span className="text-[11px] md:text-xs font-black uppercase tracking-wider text-amber-300">{meLabel}</span>
             <button
               onClick={reset}
               className="p-1 rounded-lg bg-purple-950/60 hover:bg-purple-900 border border-[#3B2D6B] text-slate-300 cursor-pointer"
@@ -267,7 +277,7 @@ export const RatioMixerRig = ({
           </div>
           <Glass a={me.a} b={me.b} height={glassH} />
           <RatioLine a={me.a} b={me.b} showSimplest={!compactOnly} />
-          <div className="flex items-center gap-1.5 flex-wrap justify-center">
+          <div className="flex items-center gap-1 flex-wrap justify-center pt-0.5">
             <Stepper icon="🥭" label="mango scoops" value={me.a} onChange={(v) => update('a', v)} />
             <Stepper icon="🥛" label="milk scoops" value={me.b} onChange={(v) => update('b', v)} />
           </div>
