@@ -6,13 +6,13 @@ import RecipeDetective from '../components/RecipeDetective';
 import RealWorldRatioLab from '../components/RealWorldRatioLab';
 import { narrationScript } from '../data/narration';
 import soundEngine from '../utils/audio';
-import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { ArrowRight, ArrowLeft, RefreshCcw, X, Unlock, Sparkles } from 'lucide-react';
 
 const STATIONS = [
-  { id: 'A', name: 'Ratio Mixer', badge: 'A' },
-  { id: 'B', name: 'Bar Model Builder', badge: 'B' },
-  { id: 'C', name: 'Recipe Detective', badge: 'C' },
-  { id: 'D', name: 'Real-World Ratio Lab', badge: 'D' },
+  { id: 'A', num: 1, name: 'Ratio Mixer', icon: '🥭', focus: 'Compare & mix equivalent ratios' },
+  { id: 'B', num: 2, name: 'Bar Model Builder', icon: '📊', focus: 'Find 1 unit value to share totals' },
+  { id: 'C', num: 3, name: 'Recipe Detective', icon: '🕵️', focus: 'Spot and fix mis-scaled ingredients' },
+  { id: 'D', num: 4, name: 'Real-World Ratio Lab', icon: '🌍', focus: 'Scale recipes, maps & teams' },
 ];
 
 const STATION_TIPS = {
@@ -23,7 +23,7 @@ const STATION_TIPS = {
 };
 
 export const SimulateStage = () => {
-  const { simulateStation, setSimulateStation, setStage } = useAppStore();
+  const { simulateStation, setSimulateStation, setStage, resetWorldsProgress } = useAppStore();
 
   const stationNarrationMap = {
     A: narrationScript.station_a_intro,
@@ -36,184 +36,170 @@ export const SimulateStage = () => {
     soundEngine.playText(stationNarrationMap[simulateStation]);
   }, [simulateStation]);
 
-  const handleMascotSpeak = () => {
-    soundEngine.playText(stationNarrationMap[simulateStation]);
-  };
-
+  const activeStationObj = STATIONS.find(s => s.id === simulateStation) || STATIONS[0];
   const stationIndex = STATIONS.findIndex((s) => s.id === simulateStation);
 
-  const handleNextStation = () => {
-    if (stationIndex < STATIONS.length - 1) {
-      setSimulateStation(STATIONS[stationIndex + 1].id);
-    } else {
-      setStage('practice');
-    }
-  };
-
-  const handlePrevStation = () => {
-    if (stationIndex > 0) {
-      setSimulateStation(STATIONS[stationIndex - 1].id);
-    } else {
-      setStage('story');
-    }
-  };
-
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-2.5 md:p-4 cosmic-bg overflow-hidden select-none">
-      {/* Decorative Rotated Watermark Numbers in Background */}
-      <div className="absolute top-8 left-8 text-7xl font-black text-purple-900/10 rotate-[-12deg] pointer-events-none font-display">
-        1 : 2
-      </div>
-      <div className="absolute top-6 right-12 text-7xl font-black text-purple-900/10 rotate-[15deg] pointer-events-none font-display">
-        3 : 5
-      </div>
-      <div className="absolute bottom-10 right-10 text-7xl font-black text-purple-900/10 rotate-[-15deg] pointer-events-none font-display">
-        × 4
+    <div className="relative w-full h-full flex flex-col justify-between items-center p-3 md:p-5 cosmic-bg overflow-hidden select-none">
+      
+      {/* Top Right Close Button matching screenshot */}
+      <div className="w-full max-w-5xl flex items-center justify-end shrink-0 pt-1 px-2 z-20">
+        <button
+          onClick={() => setStage('home')}
+          className="w-7 h-7 rounded-lg bg-indigo-600/80 hover:bg-indigo-500 text-white flex items-center justify-center font-black cursor-pointer shadow-md transition-colors"
+          title="Close"
+        >
+          <X className="w-4 h-4 stroke-[3]" />
+        </button>
       </div>
 
-      {/* 1. Main Header Title & Subtitle */}
-      <div className="flex flex-col items-center text-center space-y-0.5 pt-0.5 shrink-0">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-amber-400 font-display flex items-center gap-2">
-          <span>✏️</span>
-          <span>Simulate</span>
+      {/* Main Centered 2-Column Modal Card matching screenshot */}
+      <div className="relative z-10 bg-[#120A2B]/90 border border-purple-500/30 rounded-3xl p-5 md:p-7 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-md max-w-5xl w-full flex flex-col my-auto">
+        
+        {/* Top Glowing Cyan Handle Bar matching screenshot */}
+        <div className="w-20 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.8)] mx-auto mb-3" />
+
+        {/* Header Title: 🧪 Simulation Stations */}
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-white font-display flex items-center justify-center gap-2.5 mb-5 text-center">
+          <span>🧪</span>
+          <span>Simulation Stations</span>
         </h1>
-        <p className="text-sm md:text-base font-extrabold text-purple-200">
-          Explore and discover — no wrong answers!
-        </p>
-      </div>
 
-      {/* 2. Transparent 4 Lab Station Switcher Tab Bar */}
-      <div className="flex items-center justify-center gap-3 md:gap-4 bg-transparent p-1.5 md:p-2 max-w-4xl w-full shrink-0 my-1">
-        {STATIONS.map((st) => {
-          const isActive = simulateStation === st.id;
-          return (
+        {/* 2-Column Content Grid matching screenshot */}
+        <div className="flex flex-col md:flex-row gap-5 w-full items-stretch">
+          
+          {/* Left Column: Station Selector Navigation Menu */}
+          <div className="w-full md:w-1/3 flex flex-col justify-between space-y-3 shrink-0">
+            
+            {/* Station Cards List */}
+            <div className="flex flex-col space-y-2.5">
+              {STATIONS.map((st) => {
+                const isActive = simulateStation === st.id;
+                return (
+                  <button
+                    key={st.id}
+                    onClick={() => setSimulateStation(st.id)}
+                    className={`w-full p-3 md:p-3.5 rounded-2xl transition-all flex items-center justify-between cursor-pointer text-left ${
+                      isActive
+                        ? 'bg-cyan-950/50 border-2 border-cyan-400 text-white shadow-[0_0_18px_rgba(6,182,212,0.4)] scale-[1.02]'
+                        : 'bg-[#160B33]/80 border border-purple-800/60 hover:border-purple-600 text-purple-200'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      {/* Square Emoji Box */}
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0 ${
+                        isActive
+                          ? 'bg-cyan-500/20 border border-cyan-400/60 text-white'
+                          : 'bg-purple-950/60 border border-purple-800/50 text-purple-300'
+                      }`}>
+                        {st.icon}
+                      </div>
+
+                      <div>
+                        <h3 className={`text-xs md:text-sm font-black ${isActive ? 'text-white' : 'text-purple-200'}`}>
+                          Station {st.num}: {st.name}
+                        </h3>
+                        <p className="text-[10px] md:text-xs text-purple-300/70 font-bold truncate max-w-[140px]">
+                          {st.focus}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Unlock Status Icon */}
+                    <div className="text-purple-400/60 shrink-0">
+                      <Unlock className="w-4 h-4 text-amber-400/80" />
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Bottom Yellow CTA Button on Left Column */}
             <button
-              key={st.id}
-              onClick={() => setSimulateStation(st.id)}
-              className={`flex-1 py-2 px-3 md:px-4 rounded-xl font-black text-xs md:text-sm lg:text-base transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                isActive
-                  ? 'bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 shadow-[0_0_20px_rgba(255,184,0,0.6)] scale-105'
-                  : 'bg-purple-950/20 text-purple-200 hover:text-white hover:bg-purple-900/30'
-              }`}
+              onClick={() => setStage('practice')}
+              className="w-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-black text-xs md:text-sm py-3 px-4 rounded-full shadow-[0_0_20px_rgba(255,184,0,0.6)] hover:scale-105 transition-transform flex items-center justify-center gap-2 cursor-pointer mt-auto"
             >
-              <span className={`w-5 h-5 md:w-6 md:h-6 rounded-full text-xs md:text-sm font-black flex items-center justify-center ${isActive ? 'bg-slate-950 text-amber-400' : 'bg-purple-900 text-amber-300'}`}>
-                {st.badge}
-              </span>
-              <span className="truncate">{st.name}</span>
+              <span>Go to Practice Phase!</span>
+              <ArrowRight className="w-4 h-4 stroke-[3]" />
             </button>
-          );
-        })}
-      </div>
 
-      {/* 3. Main Active Station Content Workspace */}
-      <div className="w-full max-w-3xl flex-1 flex flex-col items-center justify-center my-auto overflow-hidden px-2">
-
-        {/* Station A: Ratio Mixer (explore) */}
-        {simulateStation === 'A' && (
-          <div className="w-full flex flex-col items-center justify-center space-y-1.5 my-auto">
-            <div className="text-center space-y-0.5">
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-black text-amber-400 flex items-center justify-center gap-2">
-                <span>🥭</span>
-                <span>Ratio Mixer</span>
-              </h3>
-              <p className="text-sm md:text-base font-extrabold text-slate-200 max-w-xl">
-                Match each target shake with a different amount: same ratio, same taste!
-              </p>
-            </div>
-
-            <div className="w-full flex items-center justify-center my-1">
-              <RatioMixerRig mode="target" compact={true} largeCircle={true} />
-            </div>
           </div>
-        )}
 
-        {/* Station B: Bar Model Builder (try it yourself) */}
-        {simulateStation === 'B' && (
-          <div className="w-full flex flex-col items-center justify-center space-y-1.5 my-auto">
-            <div className="text-center space-y-0.5">
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-black text-amber-400 flex items-center justify-center gap-2">
-                <span>📊</span>
-                <span>Bar Model Builder</span>
-              </h3>
-              <p className="text-sm md:text-base font-extrabold text-slate-200 max-w-xl">
-                Build the bars, then find the value of 1 unit to share the total!
-              </p>
+          {/* Right Column: Interactive Lab Workspace Container */}
+          <div className="w-full md:w-2/3 bg-[#0B051C]/90 border border-purple-800/60 rounded-2xl p-4 md:p-5 flex flex-col justify-between min-h-[380px] shadow-inner">
+            
+            {/* Top Workspace Bar */}
+            <div className="flex items-center justify-between pb-2 border-b border-purple-900/50 mb-3">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">{activeStationObj.icon}</span>
+                <h2 className="text-base md:text-lg font-black text-white font-display">
+                  Station {activeStationObj.id}: {activeStationObj.name}
+                </h2>
+              </div>
+              <span className="text-xs font-black text-amber-400 bg-amber-950/40 px-3 py-1 rounded-full border border-amber-500/30">
+                Station {activeStationObj.num} of 4
+              </span>
             </div>
 
-            <div className="w-full flex items-center justify-center my-1">
-              <BarModelBuilder />
+            {/* Active Lab Component Workspace */}
+            <div className="flex-1 flex flex-col items-center justify-center w-full my-auto py-2">
+              {simulateStation === 'A' && (
+                <div className="w-full flex flex-col items-center justify-center space-y-2">
+                  <p className="text-xs md:text-sm font-bold text-purple-200 text-center">
+                    Match each target shake with a different amount: same ratio, same taste!
+                  </p>
+                  <RatioMixerRig mode="target" compact={true} largeCircle={true} />
+                </div>
+              )}
+
+              {simulateStation === 'B' && (
+                <div className="w-full flex flex-col items-center justify-center space-y-2">
+                  <p className="text-xs md:text-sm font-bold text-purple-200 text-center">
+                    Build the bars, then find the value of 1 unit to share the total!
+                  </p>
+                  <BarModelBuilder />
+                </div>
+              )}
+
+              {simulateStation === 'C' && (
+                <div className="w-full flex flex-col items-center justify-center space-y-2">
+                  <p className="text-xs md:text-sm font-bold text-purple-200 text-center">
+                    One ingredient was scaled the wrong way. Tap it, then fix the amount!
+                  </p>
+                  <RecipeDetective />
+                </div>
+              )}
+
+              {simulateStation === 'D' && (
+                <div className="w-full flex flex-col items-center justify-center space-y-2">
+                  <p className="text-xs md:text-sm font-bold text-purple-200 text-center">
+                    Scale bubble tea, maps, rice & teams to reach each mission goal!
+                  </p>
+                  <RealWorldRatioLab />
+                </div>
+              )}
             </div>
+
+            {/* Bottom Tip Footer inside Workspace */}
+            <div className="mt-3 pt-2 border-t border-purple-900/50 flex items-center gap-2 bg-[#130A2A]/80 p-2.5 rounded-xl text-xs font-bold text-amber-300">
+              <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+              <span>{STATION_TIPS[simulateStation]}</span>
+            </div>
+
           </div>
-        )}
 
-        {/* Station C: Recipe Detective */}
-        {simulateStation === 'C' && (
-          <div className="w-full flex flex-col items-center justify-center space-y-1.5 my-auto">
-            <div className="text-center space-y-0.5">
-              <h3 className="text-2xl md:text-3xl font-black text-amber-400 flex items-center justify-center gap-2 font-display">
-                <span>🕵️</span>
-                <span>Recipe Detective</span>
-              </h3>
-              <p className="text-xs md:text-sm font-extrabold text-slate-200 max-w-xl">
-                One ingredient was scaled the wrong way. Tap it, then fix the amount!
-              </p>
-            </div>
-
-            <div className="w-full flex items-center justify-center my-1">
-              <RecipeDetective />
-            </div>
-          </div>
-        )}
-
-        {/* Station D: Real-World Ratio Lab */}
-        {simulateStation === 'D' && (
-          <div className="w-full flex flex-col items-center justify-center space-y-2 my-auto">
-            <div className="text-center space-y-0.5">
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-amber-400 flex items-center justify-center gap-2 font-display">
-                <span>🌍</span>
-                <span>Real-World Ratio Lab</span>
-              </h3>
-              <p className="text-base md:text-lg font-extrabold text-slate-200 max-w-xl">
-                Scale bubble tea, maps, rice & teams to reach each mission goal!
-              </p>
-            </div>
-
-            <RealWorldRatioLab />
-          </div>
-        )}
-
-      </div>
-
-      {/* 4. Mascot Speech Bubble Footer */}
-      <div className="flex items-center gap-3 max-w-xl w-full justify-center shrink-0 my-0.5">
-        <button
-          onClick={handleMascotSpeak}
-          className="w-9 h-9 rounded-full bg-[#130E26] border-2 border-amber-400 flex items-center justify-center text-lg shadow-[0_0_12px_rgba(255,184,0,0.5)] shrink-0 hover:scale-105 transition-transform"
-          title="Listen narration"
-        >
-          🤖
-        </button>
-        <div className="bg-white text-slate-900 rounded-full px-4 py-1.5 shadow-xl border border-slate-100 font-extrabold text-xs md:text-sm text-center flex-1">
-          {STATION_TIPS[simulateStation]}
         </div>
+
       </div>
 
-      {/* 5. Bottom Station Navigation Buttons */}
-      <div className="w-full max-w-xl flex items-center justify-between gap-4 pb-0.5 shrink-0">
+      {/* Reset Lesson Progress Button outside Card matching screenshot */}
+      <div className="shrink-0 pb-1 z-10">
         <button
-          onClick={handlePrevStation}
-          className="bg-[#130E26] hover:bg-[#1A1333] border border-purple-800/80 text-purple-200 hover:text-white px-7 py-2 rounded-full font-black text-xs md:text-sm cursor-pointer flex items-center gap-2 transition-colors"
+          onClick={() => resetWorldsProgress()}
+          className="bg-[#130A2B]/80 hover:bg-purple-900/50 border border-purple-800/80 text-purple-300 hover:text-white text-xs font-black px-5 py-2 rounded-full cursor-pointer transition-colors shadow-md flex items-center gap-1.5"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Previous Station</span>
-        </button>
-
-        <button
-          onClick={handleNextStation}
-          className="bg-amber-400 hover:bg-amber-300 text-slate-950 px-7 py-2 rounded-full font-black text-xs md:text-sm cursor-pointer flex items-center gap-2 shadow-glow-gold transition-transform hover:scale-105"
-        >
-          <span>Next Station</span>
-          <ArrowRight className="w-4 h-4" />
+          <RefreshCcw className="w-3.5 h-3.5 text-purple-300" />
+          <span>Reset Lesson Progress</span>
         </button>
       </div>
 
