@@ -13,33 +13,33 @@ export const WonderStage = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-full min-h-screen max-h-screen flex flex-col justify-between items-center p-2 md:p-4 cosmic-bg overflow-y-auto overflow-x-hidden select-none">
+    <div className="relative w-full h-full min-h-screen max-h-screen flex flex-col justify-between items-center p-2 md:p-3 cosmic-bg overflow-hidden select-none">
       
       {/* Top Right Close Button matching screenshot */}
-      <div className="w-full max-w-2xl flex items-center justify-end shrink-0 pt-1 px-2 z-20">
+      <div className="w-full max-w-3xl flex items-center justify-end shrink-0 pt-1 px-2 z-20">
         <button
           onClick={() => setStage('home')}
-          className="w-7 h-7 rounded-lg bg-indigo-600/80 hover:bg-indigo-500 text-white flex items-center justify-center font-black cursor-pointer shadow-md transition-colors"
+          className="w-8 h-8 rounded-lg bg-indigo-600/80 hover:bg-indigo-500 text-white flex items-center justify-center font-black cursor-pointer shadow-md transition-colors"
           title="Close"
         >
-          <X className="w-4 h-4 stroke-[3]" />
+          <X className="w-5 h-5 stroke-[3]" />
         </button>
       </div>
 
       {/* Centered Modal Card matching screenshot */}
-      <div className="relative z-10 bg-[#120A2B]/90 border border-purple-500/30 rounded-3xl p-4 md:p-6 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-md max-w-xl md:max-w-2xl w-full flex flex-col items-center text-center my-auto space-y-2 md:space-y-2.5">
+      <div className="relative z-10 bg-[#120A2B]/90 border border-purple-500/30 rounded-3xl p-4 md:p-6 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-md max-w-2xl w-full flex flex-col items-center text-center my-auto space-y-2.5 md:space-y-3">
         
         {/* Top Glowing Purple Handle Bar matching screenshot */}
-        <div className="w-16 h-1.5 rounded-full bg-purple-500 shadow-[0_0_12px_rgba(168,85,247,0.8)] mb-1 shrink-0" />
+        <div className="w-20 h-1.5 rounded-full bg-purple-500 shadow-[0_0_12px_rgba(168,85,247,0.8)] mb-1 shrink-0" />
 
         {/* 1. Header Title: 🔮 Wonder Hook */}
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-white font-display flex items-center justify-center gap-2">
-          <span>🔮</span>
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-white font-display flex items-center justify-center gap-2.5">
+          <span className="text-3xl md:text-4xl">🔮</span>
           <span>Wonder Hook</span>
         </h1>
 
         {/* 2. Robot Mascot Face Icon */}
-        <div className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[#1A0F3C] border border-purple-500/40 flex items-center justify-center text-2xl md:text-3xl shadow-md shrink-0">
+        <div className="w-13 h-13 md:w-14 md:h-14 rounded-full bg-[#1A0F3C] border border-purple-500/40 flex items-center justify-center text-3xl md:text-4xl shadow-md shrink-0">
           🤖
         </div>
 
@@ -47,38 +47,38 @@ export const WonderStage = () => {
         <div className="w-full bg-[#160B33] border-2 border-dashed border-purple-500/40 rounded-2xl p-3 md:p-4 flex flex-col items-center justify-center text-center shadow-inner my-1">
           
           {/* Top Emoji Icon */}
-          <div className="text-2xl md:text-3xl mb-0.5">
+          <div className="text-3xl md:text-4xl mb-0.5">
             🧱
           </div>
 
           {/* Big Golden Title */}
-          <h2 className="text-2xl md:text-3xl font-black text-amber-400 font-display drop-shadow-[0_2px_12px_rgba(255,184,0,0.4)]">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-amber-400 font-display drop-shadow-[0_2px_12px_rgba(255,184,0,0.4)]">
             1 : 2 Ratio!
           </h2>
 
           {/* Sub-label under big title */}
-          <p className="text-[10px] md:text-xs font-black tracking-widest text-purple-300 uppercase mt-0.5">
+          <p className="text-xs md:text-sm font-black tracking-widest text-purple-300 uppercase mt-0.5">
             ✓ REAL-WORLD RATIO HOOK!
           </p>
 
           {/* Compact Interactive Simulator inside Frame */}
-          <div className="w-full pt-1.5">
+          <div className="w-full pt-2">
             <RatioMixerRig mode="compare" compact={true} />
           </div>
         </div>
 
         {/* 4. On-Screen Story Question Paragraph */}
-        <div className="space-y-1.5 px-2">
-          <p className="text-xs md:text-sm lg:text-base font-extrabold text-white leading-relaxed">
+        <div className="space-y-2 px-2">
+          <p className="text-sm md:text-base lg:text-lg font-extrabold text-white leading-relaxed">
             Robo makes a mango shake with <span className="text-amber-400 font-black">1 scoop</span> of mango and <span className="text-amber-400 font-black">2 scoops</span> of milk. Alex says: <span className="text-amber-300 font-black">"If you use 2 scoops of mango and 4 scoops of milk, the shake will taste stronger, because there is more mango!"</span> Is that actually true?
           </p>
 
-          <p className="text-[11px] md:text-xs font-extrabold text-purple-200/90 italic">
+          <p className="text-xs md:text-sm font-extrabold text-purple-200/90 italic">
             What if you added 2 more scoops of mango but no extra milk? Would the shake still taste the same?
           </p>
 
-          <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1 rounded-full border border-amber-400/60 bg-amber-950/40 text-amber-300 font-black text-[11px] md:text-xs shadow-md mt-1">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full border border-amber-400/60 bg-amber-950/40 text-amber-300 font-black text-xs md:text-sm shadow-md mt-1">
+            <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
             <span>Same ratio, same taste! Multiply both parts equally to scale!</span>
           </div>
         </div>
@@ -86,10 +86,10 @@ export const WonderStage = () => {
         {/* 5. Golden CTA Button matching screenshot */}
         <button
           onClick={() => setStage('story')}
-          className="w-full max-w-xs bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-black text-sm md:text-base py-2.5 rounded-full shadow-[0_0_20px_rgba(255,184,0,0.7)] hover:scale-105 transition-transform flex items-center justify-center gap-2 cursor-pointer mt-2 shrink-0"
+          className="w-full max-w-sm bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-black text-base md:text-lg py-3 rounded-full shadow-[0_0_20px_rgba(255,184,0,0.7)] hover:scale-105 transition-transform flex items-center justify-center gap-2 cursor-pointer mt-2 shrink-0"
         >
           <span>Discover the Story</span>
-          <ArrowRight className="w-4 h-4 stroke-[3]" />
+          <ArrowRight className="w-5 h-5 stroke-[3]" />
         </button>
 
       </div>
@@ -98,9 +98,9 @@ export const WonderStage = () => {
       <div className="shrink-0 pb-1 z-10 my-1">
         <button
           onClick={() => resetWorldsProgress()}
-          className="bg-[#130A2B]/80 hover:bg-purple-900/50 border border-purple-800/80 text-purple-300 hover:text-white text-xs font-black px-5 py-2 rounded-full cursor-pointer transition-colors shadow-md flex items-center gap-1.5"
+          className="bg-[#130A2B]/80 hover:bg-purple-900/50 border border-purple-800/80 text-purple-300 hover:text-white text-xs md:text-sm font-black px-6 py-2 rounded-full cursor-pointer transition-colors shadow-md flex items-center gap-2"
         >
-          <RefreshCcw className="w-3.5 h-3.5 text-purple-300" />
+          <RefreshCcw className="w-4 h-4 text-purple-300" />
           <span>Reset Lesson Progress</span>
         </button>
       </div>
