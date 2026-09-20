@@ -380,28 +380,28 @@ export const PracticeStage = () => {
         </div>
 
         {/* Dark Visual / Diagram Frame Box */}
-        <div className="w-full bg-[#0B051C] border border-cyan-500/30 rounded-2xl p-4 md:p-5 flex flex-col items-center justify-center text-center shadow-inner mt-2 mb-4">
+        <div className="w-full bg-[#0B051C] border border-cyan-500/30 rounded-2xl p-5 md:p-6 flex flex-col items-center justify-center text-center shadow-inner mt-2 mb-4">
           
-          {/* Diagram / SVG Illustration */}
-          <div className="w-full max-w-md h-36 md:h-44 flex items-center justify-center">
+          {/* Enlarged Diagram / SVG Illustration */}
+          <div className="w-full max-w-lg h-44 md:h-56 lg:h-64 flex items-center justify-center">
             {currentQ.diagram ? (
               <RatioDiagramSVG diagram={currentQ.diagram} />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-indigo-950/80 to-purple-950/80 rounded-xl flex flex-col items-center justify-center p-3 text-purple-300 border border-purple-800/40">
-                <Sparkles className="w-8 h-8 text-amber-400 mb-1" />
-                <span className="text-xs font-bold text-purple-200">Interactive Ratio Lab Visual</span>
+              <div className="w-full h-full bg-gradient-to-br from-indigo-950/80 to-purple-950/80 rounded-xl flex flex-col items-center justify-center p-4 text-purple-300 border border-purple-800/40">
+                <Sparkles className="w-10 h-10 text-amber-400 mb-1.5" />
+                <span className="text-sm md:text-base font-black text-purple-200">Interactive Ratio Lab Visual</span>
               </div>
             )}
           </div>
 
-          {/* Question Prompt Text */}
-          <h2 className="text-base md:text-lg lg:text-xl font-black text-white max-w-xl leading-relaxed font-display text-center mt-3">
+          {/* Question Prompt Text (Enlarged) */}
+          <h2 className="text-lg md:text-2xl lg:text-3xl font-black text-white max-w-xl leading-relaxed font-display text-center mt-4">
             {currentQ.prompt}
           </h2>
         </div>
 
-        {/* 4 Multiple Choice Answer Options Grid (2x2) matching Screenshot 2 */}
-        <div className="grid grid-cols-2 gap-3 w-full">
+        {/* 4 Multiple Choice Answer Options Grid (2x2) (Enlarged) */}
+        <div className="grid grid-cols-2 gap-3.5 w-full">
           {currentQ.options.map((opt, idx) => {
             const isSelected = selectedOption === opt;
             let btnStyle = "bg-[#180E38]/90 border-purple-500/30 text-white hover:bg-purple-900/60 hover:border-purple-400";
@@ -419,7 +419,7 @@ export const PracticeStage = () => {
                 key={idx}
                 onClick={() => handleOptionClick(opt)}
                 disabled={!!feedback}
-                className={`py-3.5 md:py-4 px-4 rounded-2xl border ${btnStyle} font-black text-sm md:text-base transition-all flex items-center justify-center shadow-md cursor-pointer hover:scale-[1.01]`}
+                className={`py-4 md:py-5 px-5 rounded-2xl border ${btnStyle} font-black text-base md:text-xl lg:text-2xl transition-all flex items-center justify-center shadow-md cursor-pointer hover:scale-[1.01]`}
               >
                 <span>{opt}</span>
               </button>

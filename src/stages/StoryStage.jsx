@@ -65,11 +65,11 @@ export const StoryStage = () => {
 
       {/* 2. Main Story Card Workspace */}
       <div className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center my-auto overflow-hidden px-2">
-        <div className="w-full bg-[#130E26]/90 border-2 border-purple-800/60 rounded-3xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-6 shadow-[0_0_30px_rgba(139,92,246,0.3)]">
+        <div className="w-full bg-[#130E26]/90 border-2 border-purple-800/60 rounded-3xl p-5 md:p-7 flex flex-col md:flex-row items-center gap-6 md:gap-8 shadow-[0_0_35px_rgba(139,92,246,0.35)]">
           
-          {/* Left Column: Story Illustration Image */}
+          {/* Left Column: Enlarged Story Illustration Image */}
           <div className="w-full md:w-1/2 flex flex-col items-center justify-center">
-            <div className="relative w-full h-56 md:h-80 lg:h-[360px] rounded-2xl overflow-hidden border-2 border-amber-400/50 shadow-2xl bg-[#1A1333]">
+            <div className="relative w-full h-64 md:h-96 lg:h-[420px] rounded-2xl overflow-hidden border-2 border-amber-400/60 shadow-2xl bg-[#1A1333]">
               <img
                 src={currentSlide.image}
                 alt={currentSlide.title}
@@ -83,23 +83,23 @@ export const StoryStage = () => {
             
             {/* Slide Badge & Title */}
             <div className="flex items-center gap-2">
-              <span className="bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+              <span className="bg-amber-400/20 text-amber-300 border border-amber-400/50 text-sm md:text-base font-black px-4 py-1.5 rounded-full uppercase tracking-wider">
                 {currentSlide.badge || `Slide ${storySlideIndex + 1} of 4`}
               </span>
             </div>
 
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-amber-400 font-display">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-amber-400 font-display">
               {currentSlide.title}
             </h2>
 
             {/* Main Narrative Body Text */}
-            <p className="text-sm md:text-base lg:text-lg font-extrabold text-slate-100 leading-relaxed whitespace-pre-line">
+            <p className="text-base md:text-xl lg:text-2xl font-black text-slate-100 leading-relaxed whitespace-pre-line">
               {currentSlide.narrative}
             </p>
 
             {/* Key Takeaway Highlight Pill */}
-            <div className="bg-[#1A1333] border-l-4 border-amber-400 p-3 rounded-r-2xl shadow-md">
-              <p className="text-xs md:text-sm font-black text-amber-300">
+            <div className="bg-[#1A1333] border-l-4 border-amber-400 p-4 rounded-r-2xl shadow-md">
+              <p className="text-sm md:text-base lg:text-lg font-black text-amber-300">
                 ✨ {currentSlide.keyPoint}
               </p>
             </div>
@@ -115,22 +115,22 @@ export const StoryStage = () => {
         {/* Previous Button */}
         <button
           onClick={handlePrev}
-          className="bg-[#130E26] hover:bg-[#1A1333] border border-purple-800/80 text-purple-200 hover:text-white font-black text-sm md:text-base px-6 py-2.5 rounded-full transition-colors flex items-center gap-2 cursor-pointer"
+          className="bg-[#130E26] hover:bg-[#1A1333] border border-purple-800/80 text-purple-200 hover:text-white font-black text-base md:text-lg px-7 py-3 rounded-full transition-colors flex items-center gap-2 cursor-pointer"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-5 h-5" />
           <span>Previous</span>
         </button>
 
         {/* Slide Indicator Dots (4 Slides) */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           {storySlides.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setStorySlideIndex(idx)}
               className={`transition-all cursor-pointer ${
                 storySlideIndex === idx
-                  ? 'w-4 h-4 bg-amber-400 rounded-full shadow-[0_0_12px_rgba(255,184,0,0.9)] scale-110'
-                  : 'w-2.5 h-2.5 bg-purple-900/60 rounded-full hover:bg-purple-700'
+                  ? 'w-5 h-5 bg-amber-400 rounded-full shadow-[0_0_15px_rgba(255,184,0,0.9)] scale-110'
+                  : 'w-3 h-3 bg-purple-900/60 rounded-full hover:bg-purple-700'
               }`}
               title={`Slide ${idx + 1}`}
             />
@@ -140,10 +140,10 @@ export const StoryStage = () => {
         {/* Next / Step into Lab Button */}
         <button
           onClick={handleNext}
-          className="bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-black text-sm md:text-base lg:text-lg px-8 py-3 rounded-full shadow-[0_0_22px_rgba(255,184,0,0.7)] hover:scale-105 transition-transform flex items-center gap-2 cursor-pointer"
+          className="bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-black text-base md:text-lg lg:text-xl px-9 py-3.5 rounded-full shadow-[0_0_25px_rgba(255,184,0,0.7)] hover:scale-105 transition-transform flex items-center gap-2 cursor-pointer"
         >
           <span>{storySlideIndex === storySlides.length - 1 ? 'Step into Lab 🔬' : 'Next'}</span>
-          <ArrowRight className="w-5 h-5 text-slate-950" />
+          <ArrowRight className="w-6 h-6 text-slate-950 stroke-[3]" />
         </button>
       </div>
 
