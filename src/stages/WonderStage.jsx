@@ -10,6 +10,7 @@ export const WonderStage = () => {
 
   useEffect(() => {
     soundEngine.playText(narrationScript.wonder_prompt);
+    return () => soundEngine.stop();
   }, []);
 
   return (

@@ -26,6 +26,7 @@ export const PracticeStage = () => {
     if (!activeWorldId) {
       soundEngine.playText(narrationScript.practice_welcome);
     }
+    return () => soundEngine.stop();
   }, [activeWorldId]);
 
   const currentQ = session.questions ? session.questions[session.currentIndex] : null;
@@ -36,6 +37,7 @@ export const PracticeStage = () => {
     if (activeWorldId && currentQ && !session.outOfHearts && !session.completed) {
       soundEngine.playText(currentQ.prompt, 'question');
     }
+    return () => soundEngine.stop();
   }, [activeWorldId, session.currentIndex]);
 
   // Trigger Out of Hearts narration
@@ -43,6 +45,7 @@ export const PracticeStage = () => {
     if (session.outOfHearts) {
       soundEngine.playText(narrationScript.out_of_hearts);
     }
+    return () => soundEngine.stop();
   }, [session.outOfHearts]);
 
   // Trigger World Complete narration
@@ -50,6 +53,7 @@ export const PracticeStage = () => {
     if (session.completed) {
       soundEngine.playText(narrationScript.world_complete);
     }
+    return () => soundEngine.stop();
   }, [session.completed]);
 
   const handleStartWorld = (worldId) => {

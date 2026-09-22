@@ -14,6 +14,7 @@ export const StoryStage = () => {
     const audioKey = `story_slide_${storySlideIndex + 1}`;
     const textToPlay = narrationScript[audioKey] || currentSlide.narrative;
     soundEngine.playText(textToPlay);
+    return () => soundEngine.stop();
   }, [storySlideIndex]);
 
   const handleMascotSpeak = () => {

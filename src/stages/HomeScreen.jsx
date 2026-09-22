@@ -7,12 +7,8 @@ import { Sparkles, Search, BookOpen, Sliders, Gamepad2, Trophy, ArrowRight } fro
 export const HomeScreen = () => {
   const { setStage } = useAppStore();
 
-  useEffect(() => {
-    soundEngine.playText(narrationScript.home_intro);
-  }, []);
-
   const handleMascotSpeak = () => {
-    soundEngine.playText(narrationScript.home_intro);
+    // Audio narration removed for intro screen
   };
 
   return (

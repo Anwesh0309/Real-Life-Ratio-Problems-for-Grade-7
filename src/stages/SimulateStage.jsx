@@ -34,6 +34,7 @@ export const SimulateStage = () => {
 
   useEffect(() => {
     soundEngine.playText(stationNarrationMap[simulateStation]);
+    return () => soundEngine.stop();
   }, [simulateStation]);
 
   const activeStationObj = STATIONS.find(s => s.id === simulateStation) || STATIONS[0];
